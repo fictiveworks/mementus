@@ -1,5 +1,3 @@
-import "babel-polyfill";
-
 export class Node {
   constructor(id, graph) {
     this._id = id;
