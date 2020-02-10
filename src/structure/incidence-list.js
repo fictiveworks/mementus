@@ -1,3 +1,6 @@
+import Node from "../node";
+import Edge from "../edge";
+
 const DIR_OUT = true;
 const DIR_IN = false;
 
@@ -7,13 +10,33 @@ class IncidenceList {
     this._incoming = new Map();
     this.outgoingE = new Map();
     this.incomingE = new Map();
-    this.nodes = new Map();
-    this.edges = new Map();
+    this._nodes = new Map();
+    this._edges = new Map();
     this.isDirected = isDirected;
   }
 
-  hasNode(nodeId) {
-    return this.nodes.has(nodeId);
+  get nodesCount() {
+    return this._nodes.size;
+  }
+
+  get edgesCount() {
+    return this._edges.size;
+  }
+
+  hasNode(node) {
+    if (node instanceof Node) {
+      return this._nodes.get(node.id) === node;
+    } else {
+      return this._nodes.has(node);
+    }
+  }
+
+  hasEdge(edge) {
+    if (edge instanceof Edge) {
+      return this._edges.get(edge.id) === edge;
+    } else {
+      return this._edges.has(edge);
+    }
   }
 
   setEdge(edge) {
@@ -25,7 +48,7 @@ class IncidenceList {
       this.setNode(edge.to);
     }
 
-    this.edges.set(edge.id, edge);
+    this._edges.set(edge.id, edge);
     this._outgoing.get(edge.from.id).push(edge.to.id);
     this._incoming.get(edge.to.id).push(edge.from.id);
     this.outgoingE.get(edge.from.id).push(edge.id);
@@ -33,7 +56,7 @@ class IncidenceList {
   }
 
   setNode(node) {
-    this.nodes.set(node.id, node);
+    this._nodes.set(node.id, node);
     this._outgoing.set(node.id, []);
     this._incoming.set(node.id, []);
     this.outgoingE.set(node.id, []);
@@ -41,11 +64,15 @@ class IncidenceList {
   }
 
   edge(id) {
-    return this.edges.get(id);
+    return this._edges.get(id);
   }
 
   node(id) {
-    return this.nodes.get(id);
+    return this._nodes.get(id);
+  }
+
+  nodes() {
+    return this._nodes.values();
   }
 
   adjacent(id, direction=DIR_OUT) {
@@ -53,7 +80,7 @@ class IncidenceList {
     if (direction == DIR_OUT) directionalIndex = this._outgoing;
     if (direction == DIR_IN) directionalIndex = this._incoming;
 
-    return directionalIndex.get(id).map(adj => this.nodes.get(adj));
+    return directionalIndex.get(id).map(adj => this._nodes.get(adj));
   }
 
   outgoing(id) {
@@ -69,7 +96,7 @@ class IncidenceList {
     if (direction == DIR_OUT) directionalIndex = this.outgoingE;
     if (direction == DIR_IN) directionalIndex = this.incomingE;
 
-    return directionalIndex.get(id).map(adj => this.edges.get(adj));
+    return directionalIndex.get(id).map(adj => this._edges.get(adj));
   }
 
   outgoingEdges(id) {

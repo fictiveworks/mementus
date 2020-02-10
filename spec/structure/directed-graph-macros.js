@@ -1,8 +1,8 @@
 import Node from "../../src/node";
 import Edge from "../../src/edge";
 
-function outgoingNodes(t, GraphStructure) {
-  const structure = new GraphStructure();
+function outgoingNodes(t, StructureImpl) {
+  const structure = new StructureImpl();
 
   const edge = new Edge({
     from: new Node({ id: 1}),
@@ -15,8 +15,8 @@ function outgoingNodes(t, GraphStructure) {
 }
 outgoingNodes.title = () => "enumerates outgoing nodes";
 
-function outgoingEdges(t, GraphStructure) {
-  const structure = new GraphStructure();
+function outgoingEdges(t, StructureImpl) {
+  const structure = new StructureImpl();
 
   const edge = new Edge({
     id: 3,
@@ -30,8 +30,8 @@ function outgoingEdges(t, GraphStructure) {
 }
 outgoingEdges.title = () => "enumerates outgoing edges";
 
-function incomingNodes(t, GraphStructure) {
-  const structure = new GraphStructure();
+function incomingNodes(t, StructureImpl) {
+  const structure = new StructureImpl();
 
   const edge = new Edge({
     from: new Node({ id: 1}),
@@ -44,8 +44,8 @@ function incomingNodes(t, GraphStructure) {
 }
 incomingNodes.title = () => "enumerates incoming nodes";
 
-function incomingEdges(t, GraphStructure) {
-  const structure = new GraphStructure();
+function incomingEdges(t, StructureImpl) {
+  const structure = new StructureImpl();
 
   const edge = new Edge({
     id: 3,
