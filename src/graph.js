@@ -1,18 +1,15 @@
-export function createGraph(context) {
-  const graph = new Graph();
-  context(graph);
-  return graph;
-}
+import GraphBuilder from "./graph-builder";
 
 class Graph {
-  constructor() {
-    this.index = new Map();
-  }
+  constructor(initializer) {
+    const builder = new GraphBuilder();
 
-  addNode(node) {
-    if (!this.index.has(node)) {
-      this.index.set(node, new Set());
+    if (initializer) {
+      initializer(builder);
     }
+
+    this.structure = builder.graph();
+    this.index = new Map();
   }
 
   addEdge(edge) {
@@ -21,12 +18,12 @@ class Graph {
     this.index.get(edge.from).add(edge.to);
   }
 
-  nodesCount() {
-    return this.index.size;
+  get nodesCount() {
+    return this.structure.nodesCount;
   }
 
-  edgesCount() {
-    return this.edges().length;
+  get edgesCount() {
+    return this.structure.edgesCount;
   }
 
   adjacentNodes(id) {
@@ -34,6 +31,10 @@ class Graph {
     return [...this.index.get(id)].map(function(id) {
       return new Node(id, _graph);
     });
+  }
+
+  node(id) {
+    return this.structure.node(id);
   }
 
   nodes() {
