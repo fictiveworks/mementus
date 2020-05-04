@@ -1,6 +1,6 @@
 {
   "name": "mementus",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Property graphs for JS applications",
   "repository": "git@github.com:fictive-io/mementus",
   "main": "index.js",
