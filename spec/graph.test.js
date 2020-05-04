@@ -68,3 +68,68 @@ test("#createNode", t => {
   t.is(node.label, "vertex");
   t.is(node.props.title, "Vertex");
 });
+
+test("#setEdge", t => {
+  const graph = new Graph(g => {
+    g.setEdge(edge1to2());
+  });
+
+  t.is(graph.nodesCount, 2);
+  t.is(graph.edgesCount, 1);
+  t.is(graph.node(1).id, 1);
+  t.is(graph.node(2).id, 2);
+});
+
+test("#addEdge", t => {
+  const graph = new Graph(g => {
+    g.addEdge({ id: 3, from: node1(), to: node2() });
+  });
+
+  t.is(graph.nodesCount, 2);
+  t.is(graph.edgesCount, 1);
+  t.is(graph.node(1).id, 1);
+  t.is(graph.node(2).id, 2);
+  t.is(graph.edge(3).id, 3);
+});
+
+test("#addEdge with auto id", t => {
+  const graph = new Graph(g => {
+    g.addEdge({ from: node1(), to: node2() });
+  });
+
+  t.is(graph.edge(1).id, 1);
+});
+
+test("#addEdge with props", t => {
+  const graph = new Graph(g => {
+    g.addEdge({ from: node1(), to: node2(), props: {
+      title: "Relationship"
+    }});
+  });
+
+  t.is(graph.edge(1).props.title, "Relationship");
+});
+
+test("#createEdge", t => {
+  const graph = new Graph(g => {
+    g.createEdge(e => {
+      e.id = 123;
+      e.label = "relationship";
+      e.from = node1();
+      e.to = node2();
+      e.props = {
+        title: "Relationship"
+      }
+    });
+  });
+
+  t.is(graph.nodesCount, 2);
+  t.is(graph.edgesCount, 1);
+
+  const edge = graph.edge(123);
+  t.is(edge.id, 123);
+  t.is(edge.label, "relationship");
+  t.is(edge.from.id, 1);
+  t.is(edge.to.id, 2);
+  t.is(edge.props.title, "Relationship");
+});

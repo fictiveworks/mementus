@@ -44,6 +44,10 @@ class Graph {
     });
   }
 
+  edge(id) {
+    return this.structure.edge(id);
+  }
+
   edges() {
     const _graph = this;
     let edges = [];
