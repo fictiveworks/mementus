@@ -229,3 +229,41 @@ test("#nodes(props: match)", t => {
   t.is(nodes[0].props.tag, "numeral");
   t.is(nodes[1].props.tag, "numeral");
 });
+
+test("#edges", t => {
+  const graph = new Graph(g => {
+    g.setEdge(edge1to2());
+    g.setEdge(edge1to3());
+  });
+
+  const edges = graph.edges();
+  t.is(edges.length, 2);
+  t.is(edges[0].id, 1);
+  t.is(edges[1].id, 2);
+});
+
+test("#edges(label)", t => {
+  const graph = new Graph(g => {
+    g.addEdge({ id: 10, from: node1(), to: node2()});
+    g.addEdge({ id: 20, label: "checked", from: node1(), to: node3()});
+    g.addEdge({ id: 30, label: "checked", from: node2(), to: node3()});
+  });
+
+  const edges = graph.edges("checked");
+  t.is(edges.length, 2);
+  t.is(edges[0].id, 20);
+  t.is(edges[1].id, 30);
+});
+
+test("#edges(props: match)", t => {
+  const graph = new Graph(g => {
+    g.addEdge({ id: 10, from: node1(), to: node2()});
+    g.addEdge({ id: 20, props: { tag: "checked" }, from: node1(), to: node3()});
+    g.addEdge({ id: 30, props: { tag: "checked" }, from: node2(), to: node3()});
+  });
+
+  const edges = graph.edges({tag: "checked"});
+  t.is(edges.length, 2);
+  t.is(edges[0].id, 20);
+  t.is(edges[1].id, 30);
+});

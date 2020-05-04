@@ -68,12 +68,12 @@ class IncidenceList {
     this.incomingE.set(node.id, []);
   }
 
-  edge(id) {
-    return this._edges.get(id);
-  }
-
   node(id) {
     return this._nodes.get(id);
+  }
+
+  edge(id) {
+    return this._edges.get(id);
   }
 
   nodes(match) {
@@ -86,6 +86,22 @@ class IncidenceList {
       return [...this._nodes.values()].filter(node => {
         for (const prop of Object.keys(match)) {
           if (node.props[prop] !== match[prop]) return false;
+        }
+        return true;
+      });
+    }
+  }
+
+  edges(match) {
+    if (!match) return [...this._edges.values()];
+
+    if (typeof(match) === "string") {
+      return [...this._edges.values()].filter(edge => edge.label === match);
+
+    } else if (typeof(match) === "object" && match !== null) {
+      return [...this._edges.values()].filter(edge => {
+        for (const prop of Object.keys(match)) {
+          if (edge.props[prop] !== match[prop]) return false;
         }
         return true;
       });

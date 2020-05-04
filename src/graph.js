@@ -45,15 +45,8 @@ class Graph {
     return this.structure.edge(id);
   }
 
-  edges() {
-    const _graph = this;
-    let edges = [];
-    this.index.forEach(function(from) {
-      from.forEach(function(to) {
-        edges.push(new Edge(from, to, _graph));
-      });
-    });
-    return edges;
+  edges(match=null) {
+    return this.structure.edges(match);
   }
 
   hasNode(node) {
