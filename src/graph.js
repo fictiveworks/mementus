@@ -37,11 +37,8 @@ class Graph {
     return this.structure.node(id);
   }
 
-  nodes() {
-    const _graph = this;
-    return [...this.index].map(function(entry) {
-      return new Node(entry[0], _graph);
-    });
+  nodes(match=null) {
+    return this.structure.nodes(match);
   }
 
   edge(id) {

@@ -6,8 +6,8 @@ import Edge from "../src/edge";
 const node1 = () => new Node({ id: 1 });
 const node2 = () => new Node({ id: 2 });
 const node3 = () => new Node({ id: 3 });
-const edge1to2 = () => new Edge({ from: node1(), to: node2() });
-const edge1to3 = () => new Edge({ from: node1(), to: node3() });
+const edge1to2 = () => new Edge({ id: 1, from: node1(), to: node2() });
+const edge1to3 = () => new Edge({ id: 2, from: node1(), to: node3() });
 
 test("#new", t => {
   const graph = new Graph();
@@ -170,4 +170,62 @@ test("#hasEdge by id", t => {
 
   t.is(graph.hasEdge(edge1to2().id), true);
   t.is(graph.hasEdge(44), false);
+});
+
+test("#node(id)", t => {
+  const graph = new Graph(g => {
+    g.setEdge(edge1to2());
+  });
+
+  t.is(graph.node(1).id, 1);
+  t.is(graph.node(2).id, 2);
+});
+
+test("#edge(id)", t => {
+  const graph = new Graph(g => {
+    g.setEdge(edge1to2());
+  });
+
+  t.is(graph.edge(1).id, 1);
+  t.is(graph.edge(1).from.id, 1);
+  t.is(graph.edge(1).to.id, 2);
+});
+
+test("#nodes", t => {
+  const graph = new Graph(g => {
+    g.setEdge(edge1to2());
+    g.setEdge(edge1to3());
+  });
+
+  const nodes = graph.nodes();
+  t.is(nodes.length, 3);
+  t.is(nodes[0].id, 1);
+  t.is(nodes[1].id, 2);
+  t.is(nodes[2].id, 3);
+});
+
+test("#nodes(label)", t => {
+  const graph = new Graph(g => {
+    g.setEdge(edge1to2());
+    g.addNode({id: 3, label: "checked"});
+    g.addNode({id: 4, label: "checked"});
+  });
+
+  const nodes = graph.nodes("checked");
+  t.is(nodes.length, 2);
+  t.is(nodes[0].id, 3);
+  t.is(nodes[1].id, 4);
+});
+
+test("#nodes(props: match)", t => {
+  const graph = new Graph(g => {
+    g.setEdge(edge1to2());
+    g.addNode({id: 3, props: { tag: "numeral" }});
+    g.addNode({id: 4, props: { tag: "numeral" }});
+  });
+
+  const nodes = graph.nodes({ tag: "numeral" });
+  t.is(nodes.length, 2);
+  t.is(nodes[0].props.tag, "numeral");
+  t.is(nodes[1].props.tag, "numeral");
 });

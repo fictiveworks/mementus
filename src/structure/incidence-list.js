@@ -76,8 +76,20 @@ class IncidenceList {
     return this._nodes.get(id);
   }
 
-  nodes() {
-    return this._nodes.values();
+  nodes(match) {
+    if (!match) return [...this._nodes.values()];
+
+    if (typeof(match) === "string") {
+      return [...this._nodes.values()].filter(node => node.label === match);
+
+    } else if (typeof(match) === "object" && match !== null) {
+      return [...this._nodes.values()].filter(node => {
+        for (const prop of Object.keys(match)) {
+          if (node.props[prop] !== match[prop]) return false;
+        }
+        return true;
+      });
+    }
   }
 
   adjacent(id, direction=DIR_OUT) {
