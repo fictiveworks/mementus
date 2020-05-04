@@ -66,6 +66,9 @@ function hasNodeId(t, StructureImpl) {
   t.true(structure.hasNode(1));
 }
 
+hasNodeId.title = () => "tests for the presence of a given node by id";
+
+
 function hasEdgeIdentity(t, StructureImpl) {
   const structure = new StructureImpl();
   const edge = new Edge({
