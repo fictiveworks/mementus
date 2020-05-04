@@ -58,6 +58,14 @@ class Graph {
     });
     return edges;
   }
+
+  hasNode(node) {
+    return this.structure.hasNode(node);
+  }
+
+  hasEdge(edge) {
+    return this.structure.hasEdge(edge);
+  }
 }
 
 export default Graph;

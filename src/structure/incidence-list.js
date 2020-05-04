@@ -31,7 +31,12 @@ class IncidenceList {
     }
   }
 
-  hasEdge(edge) {
+  hasEdge(edge, target=null) {
+    if (target) {
+      if (!this.node(edge)) return false;
+      return this.outgoing(edge).some(n => n.id == target);
+    }
+
     if (edge instanceof Edge) {
       return this._edges.get(edge.id) === edge;
     } else {

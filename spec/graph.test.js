@@ -133,3 +133,41 @@ test("#createEdge", t => {
   t.is(edge.to.id, 2);
   t.is(edge.props.title, "Relationship");
 });
+
+test("#hasNode by ref", t => {
+  const node = node1();
+  const graph = new Graph(g => {
+    g.setNode(node);
+  });
+
+  t.is(graph.hasNode(node), true);
+  t.is(graph.hasNode(node1()), false);
+});
+
+test("#hasNode by id", t => {
+  const graph = new Graph(g => {
+    g.setNode(node1());
+  });
+
+  t.is(graph.hasNode(node1().id), true);
+  t.is(graph.hasNode(44), false);
+});
+
+test("#hasEdge by ref", t => {
+  const edge = edge1to2();
+  const graph = new Graph(g => {
+    g.setEdge(edge);
+  });
+
+  t.is(graph.hasEdge(edge), true);
+  t.is(graph.hasEdge(edge1to2()), false);
+});
+
+test("#hasEdge by id", t => {
+  const graph = new Graph(g => {
+    g.setEdge(edge1to2());
+  });
+
+  t.is(graph.hasEdge(edge1to2().id), true);
+  t.is(graph.hasEdge(44), false);
+});

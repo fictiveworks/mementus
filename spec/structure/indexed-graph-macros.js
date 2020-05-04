@@ -84,24 +84,41 @@ function hasEdgeIdentity(t, StructureImpl) {
   t.true(structure.hasEdge(edge));
 }
 
-hasEdgeIdentity.title = () => "tests for the presence of a given edge by identity";
+hasEdgeIdentity.title = () => "tests for the presence of an edge by identity";
 
 function hasEdgeId(t, StructureImpl) {
   const structure = new StructureImpl();
   const edge = new Edge({
-    id: 3,
+    id: 123,
     from: new Node({ id: 1}),
     to: new Node({ id: 2})
   });
 
-  t.false(structure.hasEdge(3));
+  t.false(structure.hasEdge(123));
 
   structure.setEdge(edge);
 
-  t.true(structure.hasEdge(3));
+  t.true(structure.hasEdge(123));
 }
 
-hasEdgeId.title = () => "tests for the presence of a given edge by id";
+hasEdgeId.title = () => "tests for the presence of an edge by id";
+
+function hasEdgeFromTo(t, StructureImpl) {
+  const structure = new StructureImpl();
+  const edge = new Edge({
+    id: 123,
+    from: new Node({ id: 1}),
+    to: new Node({ id: 2})
+  });
+
+  t.false(structure.hasEdge(1, 2));
+
+  structure.setEdge(edge);
+
+  t.true(structure.hasEdge(1, 2));
+}
+
+hasEdgeFromTo.title = () => "tests for the presence of an edge between nodes";
 
 function findNodeById(t, StructureImpl) {
   const structure = new StructureImpl();
@@ -145,6 +162,7 @@ export default [
   hasNodeId,
   hasEdgeIdentity,
   hasEdgeId,
+  hasEdgeFromTo,
   findNodeById,
   findAllNodes
 ];
