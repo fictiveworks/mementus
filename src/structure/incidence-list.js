@@ -168,7 +168,25 @@ class IncidenceList {
     }
 
     this._nodes.delete(nodeId);
+  }
 
+  removeEdge(edge) {
+    const edgeId = edge instanceof Edge ? edge.id : edge;
+    const { to, from } = this._edges.get(edgeId);
+
+    const toIndex = this._outgoing.get(from.id).indexOf(to.id);
+    this._outgoing.get(from.id).splice(toIndex, 1);
+
+    const fromIndex = this._incoming.get(to.id).indexOf(from.id);
+    this._incoming.get(to.id).splice(fromIndex, 1);
+
+    const outgoingEdgeIndex = this.outgoingE.get(from.id).indexOf(edgeId);
+    this.outgoingE.get(from.id).splice(outgoingEdgeIndex, 1);
+
+    const incomingEdgeIndex = this.incomingE.get(to.id).indexOf(edgeId);
+    this.incomingE.get(to.id).splice(incomingEdgeIndex, 1);
+
+    this._edges.delete(edgeId);
   }
 }
 

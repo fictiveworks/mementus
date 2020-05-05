@@ -39,7 +39,39 @@ function removeNodeById(t, StructureImpl) {
 
 removeNodeById.title = () => "removes all references to a node id";
 
+function removeEdgeByRef(t, StructureImpl) {
+  const structure = new StructureImpl();
+  const edge1 = new Edge({ id: 10, from: node1(), to: node2()});
+  const edge2 = new Edge({ id: 20, from: node2(), to: node3()});
+  structure.setEdge(edge1);
+  structure.setEdge(edge2);
+
+  structure.removeEdge(edge1);
+
+  t.is(structure.nodesCount, 3);
+  t.is(structure.edgesCount, 1);
+}
+
+removeEdgeByRef.title = () => "removes all references to an edge"
+
+function removeEdgeById(t, StructureImpl) {
+  const structure = new StructureImpl();
+  const edge1 = new Edge({ id: 10, from: node1(), to: node2()});
+  const edge2 = new Edge({ id: 20, from: node2(), to: node3()});
+  structure.setEdge(edge1);
+  structure.setEdge(edge2);
+
+  structure.removeEdge(10);
+
+  t.is(structure.nodesCount, 3);
+  t.is(structure.edgesCount, 1);
+}
+
+removeEdgeById.title = () => "removes all references to an edge id"
+
 export default [
   removeNodeByRef,
-  removeNodeById
+  removeNodeById,
+  removeEdgeByRef,
+  removeEdgeById
 ];
