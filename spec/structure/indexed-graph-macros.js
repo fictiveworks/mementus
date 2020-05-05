@@ -135,6 +135,23 @@ function findNodeById(t, StructureImpl) {
 
 findNodeById.title = () => "finds a node by id";
 
+function findEdgeById(t, StructureImpl) {
+  const structure = new StructureImpl();
+  const edge = new Edge({
+    id: 3,
+    from: new Node({ id: 1}),
+    to: new Node({ id: 2})
+  });
+
+  structure.setEdge(edge);
+
+  t.is(structure.edge(3).id, 3);
+  t.is(structure.edge(3).from.id, 1);
+  t.is(structure.edge(3).to.id, 2);
+}
+
+findEdgeById.title = () => "finds an edge by id";
+
 function findAllNodes(t, StructureImpl) {
   const structure = new StructureImpl();
   const edge = new Edge({
@@ -153,6 +170,30 @@ function findAllNodes(t, StructureImpl) {
 
 findAllNodes.title = () => "finds all nodes in the graph";
 
+function findAllEdges(t, StructureImpl) {
+  const structure = new StructureImpl();
+  const edge1 = new Edge({
+    id: 3,
+    from: new Node({ id: 1}),
+    to: new Node({ id: 2})
+  });
+  const edge2 = new Edge({
+    id: 4,
+    from: new Node({ id: 10}),
+    to: new Node({ id: 20})
+  });
+
+  structure.setEdge(edge1);
+  structure.setEdge(edge2);
+
+  const [first, last] = structure.edges();
+
+  t.is(first.id, 3);
+  t.is(last.id, 4);
+}
+
+findAllEdges.title = () => "finds all edges in the graph";
+
 export default [
   emptyNodeList,
   emptyEdgeList,
@@ -164,5 +205,7 @@ export default [
   hasEdgeId,
   hasEdgeFromTo,
   findNodeById,
-  findAllNodes
+  findEdgeById,
+  findAllNodes,
+  findAllEdges
 ];

@@ -139,6 +139,37 @@ class IncidenceList {
   incomingEdges(id) {
     return this.incidentEdges(id, DIR_IN);
   }
+
+  removeNode(node) {
+    const nodeId = node instanceof Node ? node.id : node;
+
+    for (const edgeId of this.outgoingE.get(nodeId)) {
+      const toId = this._edges.get(edgeId).to.id;
+
+      const incomingNodeIndex = this._incoming.get(toId).indexOf(nodeId);
+      this._incoming.get(toId).splice(incomingNodeIndex, 1);
+
+      const incomingEdgeIndex = this.incomingE.get(toId).indexOf(edgeId);
+      this.incomingE.get(toId).splice(incomingEdgeIndex, 1);
+
+      this._edges.delete(edgeId);
+    }
+
+    for (const edgeId of this.incomingE.get(nodeId)) {
+      const fromId = this._edges.get(edgeId).from.id;
+
+      const outgoingNodeIndex = this._outgoing.get(fromId).indexOf(nodeId);
+      this._outgoing.get(fromId).splice(outgoingNodeIndex, 1);
+
+      const outgoingEdgeIndex = this.outgoingE.get(fromId).indexOf(edgeId);
+      this.outgoingE.get(fromId).splice(outgoingEdgeIndex, 1);
+
+      this._edges.delete(edgeId);
+    }
+
+    this._nodes.delete(nodeId);
+
+  }
 }
 
 export default IncidenceList;
