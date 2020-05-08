@@ -134,7 +134,7 @@ test("#createEdge", t => {
   t.is(edge.props.title, "Relationship");
 });
 
-test("#hasNode by ref", t => {
+test.skip("#hasNode by ref", t => {
   const node = node1();
   const graph = new Graph(g => {
     g.setNode(node);

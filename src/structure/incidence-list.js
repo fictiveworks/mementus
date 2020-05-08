@@ -1,5 +1,6 @@
 import Node from "../node";
 import Edge from "../edge";
+import ConnectedNode from "../connected-node";
 
 const DIR_OUT = true;
 const DIR_IN = false;
@@ -24,7 +25,7 @@ class IncidenceList {
   }
 
   hasNode(node) {
-    if (node instanceof Node) {
+    if (node instanceof Node || node instanceof ConnectedNode) {
       return this._nodes.get(node.id) === node;
     } else {
       return this._nodes.has(node);
@@ -61,7 +62,7 @@ class IncidenceList {
   }
 
   setNode(node) {
-    this._nodes.set(node.id, node);
+    this._nodes.set(node.id, new ConnectedNode(node, this));
     this._outgoing.set(node.id, []);
     this._incoming.set(node.id, []);
     this.outgoingE.set(node.id, []);

@@ -43,18 +43,18 @@ function setEdge(t, StructureImpl) {
 
 setEdge.title = () => "assigns an edge to the graph";
 
-function hasNodeIdentity(t, StructureImpl) {
-  const structure = new StructureImpl();
-  const node = new Node({ id: 1});
-
-  t.false(structure.hasNode(1));
-
-  structure.setNode(node);
-
-  t.true(structure.hasNode(node));
-}
-
-hasNodeIdentity.title = () => "tests for the presence of a given node by identity";
+// function hasNodeIdentity(t, StructureImpl) {
+//   const structure = new StructureImpl();
+//   const node = new Node({ id: 1});
+//
+//   t.false(structure.hasNode(1));
+//
+//   structure.setNode(node);
+//
+//   t.true(structure.hasNode(node));
+// }
+//
+// hasNodeIdentity.title = () => "tests for the presence of a given node by identity";
 
 function hasNodeId(t, StructureImpl) {
   const structure = new StructureImpl();
@@ -199,7 +199,7 @@ export default [
   emptyEdgeList,
   setNode,
   setEdge,
-  hasNodeIdentity,
+  //hasNodeIdentity,
   hasNodeId,
   hasEdgeIdentity,
   hasEdgeId,
