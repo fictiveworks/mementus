@@ -12,12 +12,6 @@ class Graph {
     this.index = new Map();
   }
 
-  addEdge(edge) {
-    this.addNode(edge.from);
-    this.addNode(edge.to);
-    this.index.get(edge.from).add(edge.to);
-  }
-
   get nodesCount() {
     return this.structure.nodesCount;
   }
