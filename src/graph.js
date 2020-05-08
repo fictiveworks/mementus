@@ -26,13 +26,6 @@ class Graph {
     return this.structure.edgesCount;
   }
 
-  adjacentNodes(id) {
-    const _graph = this;
-    return [...this.index.get(id)].map(function(id) {
-      return new Node(id, _graph);
-    });
-  }
-
   node(id) {
     return this.structure.node(id);
   }
@@ -55,6 +48,14 @@ class Graph {
 
   hasEdge(edge) {
     return this.structure.hasEdge(edge);
+  }
+
+  outgoing(id) {
+    return this.structure.outgoing(id);
+  }
+
+  incoming(id) {
+    return this.structure.incoming(id);
   }
 }
 
