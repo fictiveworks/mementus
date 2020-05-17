@@ -2,10 +2,13 @@ import Source from "./source";
 import MapStep from "./steps/map";
 import FilterStep from "./steps/filter";
 import IdStep from "./steps/id";
+import OutStep from "./steps/out-step";
+import InStep from "./steps/in-step";
 
 class Traversal {
-  constructor(input) {
+  constructor(input, graph) {
     this.input = input;
+    this.graph = graph;
     this.reset();
   }
 
@@ -15,6 +18,16 @@ class Traversal {
 
   id() {
     this.chain.connect(IdStep);
+    return this;
+  }
+
+  out() {
+    this.chain.connect(OutStep, this.graph);
+    return this;
+  }
+
+  inc() {
+    this.chain.connect(InStep, this.graph);
     return this;
   }
 
