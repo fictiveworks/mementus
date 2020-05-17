@@ -3,9 +3,9 @@ import Graph from "../src/graph";
 import Node from "../src/node";
 import Edge from "../src/edge";
 
-const node1 = () => new Node({ id: 1 });
-const node2 = () => new Node({ id: 2 });
-const node3 = () => new Node({ id: 3 });
+const node1 = () => new Node({ id: 1, label: "trunk", props: { num: "one" }});
+const node2 = () => new Node({ id: 2, label: "twig", props: { num: "two" }});
+const node3 = () => new Node({ id: 3, label: "twig", props: { num: "three" }});
 const edge1to2 = () => new Edge({ id: 1, from: node1(), to: node2() });
 const edge1to3 = () => new Edge({ id: 2, from: node1(), to: node3() });
 
@@ -266,4 +266,59 @@ test("#edges(props: match)", t => {
   t.is(edges.length, 2);
   t.is(edges[0].id, 20);
   t.is(edges[1].id, 30);
+});
+
+test("n(id)", t => {
+  const graph = new Graph(g => {
+    g.addEdge({ id: 10, props: { tag: "marked" }, from: node1(), to: node2()});
+    g.addEdge({ id: 20, props: { tag: "checked" }, from: node1(), to: node3()});
+    g.addEdge({ id: 30, props: { tag: "checked" }, from: node2(), to: node3()});
+  });
+
+  const result = graph.n(1).outE().prop("tag").all();
+  t.deepEqual(result, ["marked", "checked"]);
+});
+
+test("n()", t => {
+  const graph = new Graph(g => {
+    g.addEdge({ id: 10, from: node1(), to: node2()});
+    g.addEdge({ id: 20, from: node1(), to: node3()});
+    g.addEdge({ id: 30, from: node2(), to: node3()});
+  });
+
+  const result = graph.n().out().id().all();
+  t.deepEqual(result, [2,3,3]);
+});
+
+test("n(label)", t => {
+  const graph = new Graph(g => {
+    g.addEdge({ id: 10, from: node1(), to: node2()});
+    g.addEdge({ id: 20, from: node1(), to: node3()});
+    g.addEdge({ id: 30, from: node2(), to: node3()});
+  });
+
+  const result = graph.n("twig").id().all();
+  t.deepEqual(result, [2,3]);
+});
+
+test("n(prop: match)", t => {
+  const graph = new Graph(g => {
+    g.addEdge({ id: 10, from: node1(), to: node2()});
+    g.addEdge({ id: 20, from: node1(), to: node3()});
+    g.addEdge({ id: 30, from: node2(), to: node3()});
+  });
+
+  const result = graph.n({num: "one"}).outE().id().all();
+  t.deepEqual(result, [10, 20]);
+});
+
+test("e(id)", t => {
+  const graph = new Graph(g => {
+    g.addEdge({ id: 10, props: { tag: "marked" }, from: node1(), to: node2()});
+    g.addEdge({ id: 20, props: { tag: "checked" }, from: node1(), to: node3()});
+    g.addEdge({ id: 30, props: { tag: "checked" }, from: node2(), to: node3()});
+  });
+
+  const result = graph.e(10).props().one();
+  t.deepEqual(result, { tag: "marked" });
 });

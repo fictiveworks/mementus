@@ -1,4 +1,6 @@
 import GraphBuilder from "./graph-builder";
+import Traversal from "./pipeline/traversal";
+import Source from "./pipeline/source";
 
 class Graph {
   constructor(initializer) {
@@ -58,6 +60,20 @@ class Graph {
 
   incomingEdges(id) {
     return this.structure.incomingEdges(id);
+  }
+
+  n(match=null) {
+    const sequence = typeof match === "number" ?
+      [this.structure.node(match)] : this.structure.nodes(match);
+
+    return new Traversal(sequence, this);
+  }
+
+  e(match=null) {
+    const sequence = typeof match === "number" ?
+      [this.structure.edge(match)] : this.structure.edges(match);
+
+    return new Traversal(sequence, this);
   }
 }
 
