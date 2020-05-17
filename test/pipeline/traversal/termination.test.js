@@ -24,3 +24,15 @@ test("Terminate by taking a given number of values", t => {
 
   t.deepEqual(traversal.take(4), [1,2,3,4]);
 });
+
+test("Run the pipeline returning an iterator that can produce values", t => {
+  const traversal = new Traversal([1,2,3,4]);
+
+  const producer = traversal.run();
+
+  t.is(producer.next().value, 1);
+  t.is(producer.next().value, 2);
+  t.is(producer.next().value, 3);
+  t.is(producer.next().value, 4);
+  t.true(producer.next().done);
+});

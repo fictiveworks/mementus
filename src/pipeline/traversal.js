@@ -55,6 +55,10 @@ class Traversal {
     return result;
   }
 
+  run() {
+    return this.chain.process();
+  }
+
   toString() {
     let out = [];
     let pipe = this.chain.pipe;
