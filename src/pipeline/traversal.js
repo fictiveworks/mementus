@@ -1,6 +1,7 @@
 import Source from "./source";
 import MapStep from "./steps/map-step";
 import FilterStep from "./steps/filter-step";
+import WhereStep from "./steps/where-step";
 import IdStep from "./steps/id-step";
 import LabelStep from "./steps/label-step";
 import PropsStep from "./steps/props-step";
@@ -64,6 +65,10 @@ class Traversal {
   map(transform) {
     this.chain.connect(MapStep, transform);
     return this;
+  }
+
+  where(predicate) {
+    this.chain.connect(WhereStep, predicate);
   }
 
   filter(predicate) {
