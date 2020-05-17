@@ -1,7 +1,7 @@
 import Source from "./source";
-import MapStep from "./steps/map";
-import FilterStep from "./steps/filter";
-import IdStep from "./steps/id";
+import MapStep from "./steps/map-step";
+import FilterStep from "./steps/filter-step";
+import IdStep from "./steps/id-step";
 import OutStep from "./steps/out-step";
 import InStep from "./steps/in-step";
 

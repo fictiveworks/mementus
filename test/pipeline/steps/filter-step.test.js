@@ -1,6 +1,6 @@
 import test from "ava";
 import Source from "../../../src/pipeline/source";
-import FilterStep from "../../../src/pipeline/steps/filter";
+import FilterStep from "../../../src/pipeline/steps/filter-step";
 
 test("Predicate filters passed in values", t => {
   const predicate = n => n % 2;
