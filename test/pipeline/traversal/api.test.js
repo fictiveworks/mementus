@@ -37,3 +37,20 @@ test("inc", t => {
   t.is(result[0].id, 2);
   t.is(result[1].id, 3);
 });
+
+test("outE", t => {
+  const traversal = new Traversal([fanOutEdges.node(1)], fanOutEdges);
+
+  const result = traversal.out().all();
+  t.is(result[0].id, 10);
+  t.is(result[1].id, 20);
+  t.is(result[2].id, 30);
+});
+
+test("inE", t => {
+  const traversal = new Traversal([fanOutEdges.node(5)], fanOutEdges);
+
+  const result = traversal.inE().all();
+  t.is(result[0].id, 40);
+  t.is(result[1].id, 50);
+});

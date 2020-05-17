@@ -2,6 +2,7 @@ import Source from "./source";
 import MapStep from "./steps/map-step";
 import FilterStep from "./steps/filter-step";
 import IdStep from "./steps/id-step";
+import PropsStep from "./steps/props-step";
 import OutStep from "./steps/out-step";
 import InStep from "./steps/in-step";
 
@@ -18,6 +19,11 @@ class Traversal {
 
   id() {
     this.chain.connect(IdStep);
+    return this;
+  }
+
+  props() {
+    this.chain.connect(PropsStep);
     return this;
   }
 
