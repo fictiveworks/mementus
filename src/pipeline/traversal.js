@@ -69,6 +69,7 @@ class Traversal {
 
   where(predicate) {
     this.chain.connect(WhereStep, predicate, this.graph);
+    return this;
   }
 
   filter(predicate) {
