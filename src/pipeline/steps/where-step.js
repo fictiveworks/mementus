@@ -9,7 +9,7 @@ class WhereStep {
 
   *process() {
     for (const element of this.pipe.process()) {
-      const subtraversal = new Traversal(element, this.graph);
+      const subtraversal = new Traversal([element], this.graph);
       if (this.predicate(subtraversal)) yield element;
     }
   }
