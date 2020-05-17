@@ -29,14 +29,29 @@ class Traversal {
   }
 
   one() {
-    const generator = this.chain.process();
+    const producer = this.chain.process();
     this.reset();
-    return generator.next().value;
+    return producer.next().value;
   }
 
   all() {
     const result = [...this.chain.process()];
     this.reset();
+    return result;
+  }
+
+  take(num) {
+    const producer = this.chain.process();
+    this.reset();
+
+    const result = [];
+
+    for (let n=0; n<num; n++) {
+      const current = producer.next();
+      if (current.done) break;
+      result.push(current.value);
+    }
+
     return result;
   }
 

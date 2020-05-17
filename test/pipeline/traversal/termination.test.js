@@ -18,3 +18,9 @@ test("Terminate with one value", t => {
 
   t.deepEqual(traversal.one(), 1);
 });
+
+test("Terminate by taking a given number of values", t => {
+  const traversal = new Traversal([1,2,3,4,5,6,7,8]);
+
+  t.deepEqual(traversal.take(4), [1,2,3,4]);
+});
