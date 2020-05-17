@@ -118,9 +118,10 @@ class IncidenceList {
       return directionalIndex.get(id).map(adj => this._nodes.get(adj));
     }
 
-    return this.incidentEdges(id, direction).reduce((result, outE) => {
-      if (outE.label == label) {
-        result.push(this._nodes.get(outE.to.id));
+    return this.incidentEdges(id, direction).reduce((result, edge) => {
+      if (edge.label == label) {
+        const node = direction == DIR_OUT ? edge.to : edge.from;
+        result.push(this._nodes.get(node.id));
       }
       return result;
     }, []);
