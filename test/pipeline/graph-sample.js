@@ -3,9 +3,9 @@ import Node from "../../src/node";
 import Edge from "../../src/edge";
 
 const node1 = () => new Node({ id: 1 });
-const node2 = () => new Node({ id: 2 });
-const node3 = () => new Node({ id: 3 });
-const node4 = () => new Node({ id: 4 });
+const node2 = () => new Node({ id: 2, props: { color: "red" }});
+const node3 = () => new Node({ id: 3, props: { color: "green" } });
+const node4 = () => new Node({ id: 4, props: { color: "blue" } });
 const node5 = () => new Node({ id: 5 });
 const node6 = () => new Node({ id: 6 });
 const edge1to2 = () => new Edge({ id: 10, from: node1(), to: node2() });

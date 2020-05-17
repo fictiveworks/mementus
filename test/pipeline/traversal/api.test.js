@@ -54,3 +54,19 @@ test("inE", t => {
   t.is(result[0].id, 40);
   t.is(result[1].id, 50);
 });
+
+test("props", t => {
+  const nodes = [fanOutEdges.node(2), fanOutEdges.node(3), fanOutEdges.node(4)];
+  const traversal = new Traversal(nodes, fanOutEdges);
+
+  const result = traversal.props().all();
+  t.deepEqual(result, [{ color: "red"}, { color: "green"}, { color: "blue"}]);
+});
+
+test("prop", t => {
+  const nodes = [fanOutEdges.node(2), fanOutEdges.node(3), fanOutEdges.node(4)];
+  const traversal = new Traversal(nodes, fanOutEdges);
+
+  const result = traversal.prop("color").all();
+  t.deepEqual(result, ["red", "green", "blue"]);
+});
