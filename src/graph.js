@@ -51,6 +51,14 @@ class Graph {
   incoming(id) {
     return this.structure.incoming(id);
   }
+
+  outgoingEdges(id) {
+    return this.structure.outgoingEdges(id);
+  }
+
+  incomingEdges(id) {
+    return this.structure.incomingEdges(id);
+  }
 }
 
 export default Graph;
