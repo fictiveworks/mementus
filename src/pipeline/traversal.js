@@ -1,6 +1,7 @@
 import Source from "./source";
-import IdStep from "./steps/id";
+import MapStep from "./steps/map";
 import FilterStep from "./steps/filter";
+import IdStep from "./steps/id";
 
 class Traversal {
   constructor(input) {
@@ -14,6 +15,11 @@ class Traversal {
 
   id() {
     this.chain.connect(IdStep);
+    return this;
+  }
+
+  map(transform) {
+    this.chain.connect(MapStep, transform);
     return this;
   }
 
