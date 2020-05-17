@@ -15,12 +15,6 @@ test("filter", t => {
   t.deepEqual(traversal.filter(i => i % 2).all(), [1,3]);
 });
 
-test("id", t => {
-  const traversal = new Traversal([{id: 1}, {id: 2}, {id: 3}, {id: 4}]);
-
-  t.deepEqual(traversal.id().all(), [1,2,3,4]);
-});
-
 test("out", t => {
   const traversal = new Traversal([fanOutEdges.node(1)], fanOutEdges);
 
@@ -53,6 +47,23 @@ test("inE", t => {
   const result = traversal.inE().all();
   t.is(result[0].id, 40);
   t.is(result[1].id, 50);
+});
+
+test("id", t => {
+  const traversal = new Traversal([{id: 1}, {id: 2}, {id: 3}, {id: 4}]);
+
+  t.deepEqual(traversal.id().all(), [1,2,3,4]);
+});
+
+test("label", t => {
+  const traversal = new Traversal([
+    {id: 1, label: "aaa" },
+    {id: 2, label: "aaa" },
+    {id: 3, label: "bbb" },
+    {id: 4, label: "ccc" }
+  ]);
+
+  t.deepEqual(traversal.label().all(), ["aaa", "aaa", "bbb", "ccc"]);
 });
 
 test("props", t => {
