@@ -41,13 +41,13 @@ class Traversal {
     return this;
   }
 
-  out() {
-    this.chain.connect(OutStep, this.graph);
+  out(label=null) {
+    this.chain.connect(OutStep, this.graph, label);
     return this;
   }
 
-  inc() {
-    this.chain.connect(InStep, this.graph);
+  inc(label=null) {
+    this.chain.connect(InStep, this.graph, label);
     return this;
   }
 

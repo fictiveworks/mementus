@@ -301,6 +301,17 @@ test("n(label)", t => {
   t.deepEqual(result, [2,3]);
 });
 
+test("n(label).out(label)", t => {
+  const graph = new Graph(g => {
+    g.addEdge({ id: 10, label: "habit", from: node1(), to: node2()});
+    g.addEdge({ id: 20, label: "canopy", from: node1(), to: node3()});
+    g.addEdge({ id: 30, label: "canopy", from: node2(), to: node3()});
+  });
+
+  const result = graph.n("trunk").out("canopy").id().all();
+  t.deepEqual(result, [3]);
+});
+
 test("n(prop: match)", t => {
   const graph = new Graph(g => {
     g.addEdge({ id: 10, from: node1(), to: node2()});

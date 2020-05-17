@@ -46,12 +46,12 @@ class Graph {
     return this.structure.hasEdge(edge);
   }
 
-  outgoing(id) {
-    return this.structure.outgoing(id);
+  outgoing(id, label) {
+    return this.structure.outgoing(id, label);
   }
 
-  incoming(id) {
-    return this.structure.incoming(id);
+  incoming(id, label) {
+    return this.structure.incoming(id, label);
   }
 
   outgoingEdges(id) {

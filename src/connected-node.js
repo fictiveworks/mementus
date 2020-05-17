@@ -15,10 +15,6 @@ class ConnectedNode {
 
     Object.preventExtensions(this);
   }
-
-  outgoing() {
-    
-  }
 }
 
 export default ConnectedNode;

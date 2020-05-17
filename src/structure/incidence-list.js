@@ -109,20 +109,29 @@ class IncidenceList {
     }
   }
 
-  adjacent(id, direction=DIR_OUT) {
+  adjacent(id, direction=DIR_OUT, label=null) {
     let directionalIndex;
     if (direction == DIR_OUT) directionalIndex = this._outgoing;
     if (direction == DIR_IN) directionalIndex = this._incoming;
 
-    return directionalIndex.get(id).map(adj => this._nodes.get(adj));
+    if (!label) {
+      return directionalIndex.get(id).map(adj => this._nodes.get(adj));
+    }
+
+    return this.incidentEdges(id, direction).reduce((result, outE) => {
+      if (outE.label == label) {
+        result.push(this._nodes.get(outE.to.id));
+      }
+      return result;
+    }, []);
   }
 
-  outgoing(id) {
-    return this.adjacent(id, DIR_OUT);
+  outgoing(id, label=null) {
+    return this.adjacent(id, DIR_OUT, label);
   }
 
-  incoming(id) {
-    return this.adjacent(id, DIR_IN);
+  incoming(id, label=null) {
+    return this.adjacent(id, DIR_IN, label);
   }
 
   incidentEdges(id, direction=DIR_OUT) {
