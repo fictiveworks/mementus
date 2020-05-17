@@ -23,8 +23,7 @@
     "src"
   ],
   "ava": {
-    "require": [
-      "esm"
-    ]
+    "files": ["test/**/*.test.js"],
+    "require": ["esm"]
   }
 }
