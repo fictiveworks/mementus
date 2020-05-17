@@ -5,6 +5,8 @@ import IdStep from "./steps/id-step";
 import PropsStep from "./steps/props-step";
 import OutStep from "./steps/out-step";
 import InStep from "./steps/in-step";
+import OutEStep from "./steps/out-e-step";
+import InEStep from "./steps/in-e-step";
 
 class Traversal {
   constructor(input, graph) {
@@ -34,6 +36,16 @@ class Traversal {
 
   inc() {
     this.chain.connect(InStep, this.graph);
+    return this;
+  }
+
+  outE() {
+    this.chain.connect(OutEStep, this.graph);
+    return this;
+  }
+
+  inE() {
+    this.chain.connect(InEStep, this.graph);
     return this;
   }
 

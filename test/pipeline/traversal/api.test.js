@@ -41,7 +41,7 @@ test("inc", t => {
 test("outE", t => {
   const traversal = new Traversal([fanOutEdges.node(1)], fanOutEdges);
 
-  const result = traversal.out().all();
+  const result = traversal.outE().all();
   t.is(result[0].id, 10);
   t.is(result[1].id, 20);
   t.is(result[2].id, 30);
