@@ -1,6 +1,5 @@
 import test from "ava";
 import Traversal from "../../../src/pipeline/traversal";
-import Node from "../../../src/Node";
 import { fanOutEdges } from "../graph-sample";
 
 test("map", t => {
