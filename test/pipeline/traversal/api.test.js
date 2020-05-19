@@ -80,3 +80,14 @@ test("prop", t => {
   const result = traversal.prop("color").all();
   t.deepEqual(result, ["red", "green", "blue"]);
 });
+
+test("where", t => {
+  const nodes = [fanOutEdges.node(1), fanOutEdges.node(2)];
+  const traversal = new Traversal(nodes, fanOutEdges);
+
+  const result = traversal.where(n => n.id().one() == 1);
+
+  // TODO: investigate why this can't be called multiple times
+  // something to do with callback function state and traversal.reset()
+  t.deepEqual(result.id().all(), [1]);
+});
