@@ -91,3 +91,15 @@ test("where", t => {
   // something to do with callback function state and traversal.reset()
   t.deepEqual(result.id().all(), [1]);
 });
+
+test("union", t => {
+  const nodes = [fanOutEdges.node(5), fanOutEdges.node(6)];
+  const traversal = new Traversal(nodes, fanOutEdges);
+
+  const result = traversal.union(
+    p => p.inc().id().all(),
+    p => p.inc().id().all()
+  ).all();
+
+  t.deepEqual(result, [2,3]);
+});
