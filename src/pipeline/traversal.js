@@ -2,6 +2,7 @@ import Source from "./source";
 import MapStep from "./steps/map-step";
 import FilterStep from "./steps/filter-step";
 import WhereStep from "./steps/where-step";
+import UnionStep from "./steps/union-step";
 import IdStep from "./steps/id-step";
 import LabelStep from "./steps/label-step";
 import PropsStep from "./steps/props-step";
@@ -74,6 +75,11 @@ class Traversal {
 
   filter(predicate) {
     this.chain.connect(FilterStep, predicate);
+    return this;
+  }
+
+  union(base, other) {
+    this.chain.connect(UnionStep, this.graph, base, other);
     return this;
   }
 
