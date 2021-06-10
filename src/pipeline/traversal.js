@@ -53,6 +53,11 @@ class Traversal {
     return this;
   }
 
+  in(label=null) {
+    this.chain.connect(InStep, this.graph, label);
+    return this;
+  }
+
   outE() {
     this.chain.connect(OutEStep, this.graph);
     return this;

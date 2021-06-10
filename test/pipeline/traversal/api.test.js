@@ -23,10 +23,10 @@ test("out", t => {
   t.is(result[2].id, 4);
 });
 
-test("inc", t => {
+test("in", t => {
   const traversal = new Traversal([fanOutEdges.node(5)], fanOutEdges);
 
-  const result = traversal.inc().all();
+  const result = traversal.in().all();
   t.is(result[0].id, 2);
   t.is(result[1].id, 3);
 });
