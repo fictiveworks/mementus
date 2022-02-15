@@ -6,53 +6,55 @@
 // a profiling and refactoring tidyup.
 //
 // @maetl / 2017
-function PriorityQueue() {
-  this._heap = [];
-  this._size = 0;
-}
-
-PriorityQueue.prototype.add = function(item, priority) {
-  this._heap[++this._size] = [priority, item];
-  this._bubbleUp(this._size);
-}
-
-PriorityQueue.prototype.isEmpty = function() {
-  return this._size == 0;
-}
-
-PriorityQueue.prototype.removeFirst = function() {
-  var first = this._heap[1][1];
-  this._swap(1, this._size--);
-  this._heap[this._size+1] = null;
-  this._bubbleDown(1);
-  return first;
-}
-
-PriorityQueue.prototype._bubbleUp = function(pos) {
-  while (pos > 1 && this._comparison(Math.floor(pos / 2), pos)) {
-    this._swap(Math.floor(pos / 2), pos);
-    pos = Math.floor(pos / 2);
+class PriorityQueue {
+  constructor() {
+    this._heap = [];
+    this._size = 0;
   }
-}
 
-PriorityQueue.prototype._bubbleDown = function(pos) {
-  while (2 * pos <= this._size) {
-    var next = 2 * pos;
-    if (next < this._size && this._comparison(next, next +1)) next++;
-    if (!this._comparison(pos, next)) break;
-    this._swap(pos, next);
-    pos = next;
+  enqueue(item, priority) {
+    this._heap[++this._size] = [priority, item];
+    this.bubbleUp(this._size);
   }
-}
 
-PriorityQueue.prototype._comparison = function(a, b) {
-  return this._heap[a][0] > this._heap[b][0];
-}
+  dequeue() {
+    var first = this._heap[1][1];
+    this.swap(1, this._size--);
+    this._heap[this._size + 1] = null;
+    this.bubbleDown(1);
+    return first;
+  }
 
-PriorityQueue.prototype._swap = function(a, b) {
-  var item = this._heap[a];
-  this._heap[a] = this._heap[b];
-  this._heap[b] = item;
+  isEmpty() {
+    return this._size == 0;
+  }
+
+  bubbleUp(pos) {
+    while (pos > 1 && this.comparison(Math.floor(pos / 2), pos)) {
+      this.swap(Math.floor(pos / 2), pos);
+      pos = Math.floor(pos / 2);
+    }
+  }
+
+  bubbleDown(pos) {
+    while (2 * pos <= this._size) {
+      const next = 2 * pos;
+      if (next < this._size && this.comparison(next, next + 1)) next++;
+      if (!this.comparison(pos, next)) break;
+      this.swap(pos, next);
+      pos = next;
+    }
+  }
+
+  comparison(a, b) {
+    return this._heap[a][0] > this._heap[b][0];
+  }
+
+  swap(a, b) {
+    const item = this._heap[a];
+    this._heap[a] = this._heap[b];
+    this._heap[b] = item;
+  }
 }
 
 export default PriorityQueue;
