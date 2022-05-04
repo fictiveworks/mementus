@@ -1,11 +1,10 @@
-import Traversal from "../traversal.js";
-
 class UnionStep {
-  constructor(source, graph, base, other) {
+  constructor(source, graph, base, other, traverser) {
     this.pipe = source;
     this.graph = graph;
     this.base = base;
     this.other = other;
+    this.traverser = traverser;
   }
 
   *process() {
@@ -13,8 +12,8 @@ class UnionStep {
     let _other = [];
 
     for (const element of this.pipe.process()) {
-      _base = _base.concat(this.base(new Traversal([element], this.graph)));
-      _other = _other.concat(this.other(new Traversal([element], this.graph)));
+      _base = _base.concat(this.base(new this.traverser([element], this.graph)));
+      _other = _other.concat(this.other(new this.traverser([element], this.graph)));
     }
 
      yield* new Set([..._base, ..._other]);

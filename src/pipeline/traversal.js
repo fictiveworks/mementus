@@ -74,7 +74,7 @@ class Traversal {
   }
 
   where(predicate) {
-    this.chain.connect(WhereStep, predicate, this.graph);
+    this.chain.connect(WhereStep, predicate, this.graph, Traversal);
     return this;
   }
 
@@ -84,7 +84,7 @@ class Traversal {
   }
 
   union(base, other) {
-    this.chain.connect(UnionStep, this.graph, base, other);
+    this.chain.connect(UnionStep, this.graph, base, other, Traversal);
     return this;
   }
 

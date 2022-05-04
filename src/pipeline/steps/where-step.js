@@ -1,15 +1,14 @@
-import Traversal from "../traversal.js";
-
 class WhereStep {
-  constructor(source, predicate, graph) {
+  constructor(source, predicate, graph, traverser) {
     this.pipe = source;
     this.predicate = predicate;
     this.graph = graph;
+    this.traverser = traverser;
   }
 
   *process() {
     for (const element of this.pipe.process()) {
-      const subtraversal = new Traversal([element], this.graph);
+      const subtraversal = new this.traverser([element], this.graph);
       if (this.predicate(subtraversal)) yield element;
     }
   }
