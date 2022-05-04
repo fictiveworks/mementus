@@ -1,6 +1,6 @@
-import Node from "../node";
-import Edge from "../edge";
-import ConnectedNode from "../connected-node";
+import Node from "../node.js";
+import Edge from "../edge.js";
+import ConnectedNode from "../connected-node.js";
 
 const DIR_OUT = true;
 const DIR_IN = false;

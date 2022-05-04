@@ -1,4 +1,4 @@
-import Traversal from "../traversal";
+import Traversal from "../traversal.js";
 
 class UnionStep {
   constructor(source, graph, base, other) {

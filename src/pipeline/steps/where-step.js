@@ -1,4 +1,4 @@
-import Traversal from "../traversal";
+import Traversal from "../traversal.js";
 
 class WhereStep {
   constructor(source, predicate, graph) {

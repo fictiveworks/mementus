@@ -1,6 +1,6 @@
-import GraphBuilder from "./graph-builder";
-import Traversal from "./pipeline/traversal";
-import Source from "./pipeline/source";
+import GraphBuilder from "./graph-builder.js";
+import Traversal from "./pipeline/traversal.js";
+import Source from "./pipeline/source.js";
 
 class Graph {
   constructor(initializer) {

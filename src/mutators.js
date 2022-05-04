@@ -1,5 +1,5 @@
-import Node from "./node";
-import Edge from "./edge";
+import Node from "./node.js";
+import Edge from "./edge.js";
 
 const Mutators = {
   setNode(node) {

@@ -1,6 +1,6 @@
-import IncidenceList from "./structure/incidence-list";
-import IntegerId from "./integer-id";
-import Mutators from "./mutators";
+import IncidenceList from "./structure/incidence-list.js";
+import IntegerId from "./integer-id.js";
+import Mutators from "./mutators.js";
 
 class GraphBuilder {
   constructor() {

@@ -1,16 +1,16 @@
-import Source from "./source";
-import MapStep from "./steps/map-step";
-import FilterStep from "./steps/filter-step";
-import WhereStep from "./steps/where-step";
-import UnionStep from "./steps/union-step";
-import IdStep from "./steps/id-step";
-import LabelStep from "./steps/label-step";
-import PropsStep from "./steps/props-step";
-import PropStep from "./steps/prop-step";
-import OutStep from "./steps/out-step";
-import InStep from "./steps/in-step";
-import OutEStep from "./steps/out-e-step";
-import InEStep from "./steps/in-e-step";
+import Source from "./source.js";
+import MapStep from "./steps/map-step.js";
+import FilterStep from "./steps/filter-step.js";
+import WhereStep from "./steps/where-step.js";
+import UnionStep from "./steps/union-step.js";
+import IdStep from "./steps/id-step.js";
+import LabelStep from "./steps/label-step.js";
+import PropsStep from "./steps/props-step.js";
+import PropStep from "./steps/prop-step.js";
+import OutStep from "./steps/out-step.js";
+import InStep from "./steps/in-step.js";
+import OutEStep from "./steps/out-e-step.js";
+import InEStep from "./steps/in-e-step.js";
 
 class Traversal {
   constructor(input, graph) {
