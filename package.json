@@ -11,7 +11,7 @@
     "build": "npm run build:bundle ; npm run build:compile",
     "build:bundle": "rollup -c",
     "build:compile": "tsc",
-    "test": "ava --verbose"
+    "test": "ava --verbose 'test/**/*.test.js'"
   },
   "devDependencies": {
     "@rollup/plugin-json": "^4.1.0",
