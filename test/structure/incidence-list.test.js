@@ -1,11 +1,17 @@
 import test from "ava";
-import IncidenceList from "../../src/structure/incidence-list";
-import Node from "../../src/node";
-import Edge from "../../src/edge";
-import directedGraphMacros from "./directed-graph-macros";
-import indexedGraphMacros from "./indexed-graph-macros";
-import mutableGraphMacros from "./mutable-graph-macros";
+import IncidenceList from "../../src/structure/incidence-list.js";
+import directedGraphMacros from "./directed-graph-macros.js";
+import indexedGraphMacros from "./indexed-graph-macros.js";
+import mutableGraphMacros from "./mutable-graph-macros.js";
 
-test(directedGraphMacros, IncidenceList);
-test(indexedGraphMacros, IncidenceList);
-test(mutableGraphMacros, IncidenceList);
+for (const directedGraphMacro of directedGraphMacros) {
+  test(directedGraphMacro.title(), test.macro(directedGraphMacro), IncidenceList);
+}
+
+for (const indexedGraphMacro of indexedGraphMacros) {
+  test(indexedGraphMacro.title(), test.macro(indexedGraphMacro), IncidenceList);
+}
+
+for (const mutableGraphMacro of mutableGraphMacros) {
+  test(mutableGraphMacro.title(), test.macro(mutableGraphMacro), IncidenceList);
+}

@@ -1,5 +1,5 @@
-import Node from "../../src/node";
-import Edge from "../../src/edge";
+import Node from "../../src/node.js";
+import Edge from "../../src/edge.js";
 
 function emptyNodeList(t, StructureImpl) {
   const structure = new StructureImpl();

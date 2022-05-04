@@ -1,6 +1,6 @@
 import test from "ava";
-import Source from "../../../src/pipeline/source";
-import PropStep from "../../../src/pipeline/steps/prop-step";
+import Source from "../../../src/pipeline/source.js";
+import PropStep from "../../../src/pipeline/steps/prop-step.js";
 
 test("Deferences props from input pipe", t => {
   const prop = new PropStep(new Source([

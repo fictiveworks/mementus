@@ -1,6 +1,6 @@
 import test from "ava";
-import Source from "../../../src/pipeline/source";
-import MapStep from "../../../src/pipeline/steps/map-step";
+import Source from "../../../src/pipeline/source.js";
+import MapStep from "../../../src/pipeline/steps/map-step.js";
 
 test("Transforms objects from input pipe", t => {
   const transform = n => n.id;

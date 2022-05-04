@@ -1,5 +1,5 @@
 import test from "ava";
-import Node from "../src/node";
+import Node from "../src/node.js";
 
 test("initializes with id", t => {
   const node = new Node({ id: 22 });

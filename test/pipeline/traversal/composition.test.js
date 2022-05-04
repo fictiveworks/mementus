@@ -1,5 +1,5 @@
 import test from "ava";
-import Traversal from "../../../src/pipeline/traversal";
+import Traversal from "../../../src/pipeline/traversal.js";
 
 test("Connect collection source", t => {
   const traversal = new Traversal([]);

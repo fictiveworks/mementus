@@ -1,5 +1,5 @@
 import test from "ava";
-import Queue from "../../src/util/queue";
+import Queue from "../../src/util/queue.js";
 
 test("queue starts empty", t => {
   const queue = new Queue();

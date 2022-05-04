@@ -1,6 +1,6 @@
 import test from "ava";
-import Edge from "../src/edge";
-import Node from "../src/node";
+import Edge from "../src/edge.js";
+import Node from "../src/node.js";
 
 test("should initialize with integer ids", t => {
   const edge = new Edge({ from: 1, to: 2 });

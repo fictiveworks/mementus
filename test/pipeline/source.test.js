@@ -1,5 +1,5 @@
 import test from "ava";
-import Source from "../../src/pipeline/source";
+import Source from "../../src/pipeline/source.js";
 
 class DoubleStep {
   constructor(pipe, marker) {

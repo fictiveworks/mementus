@@ -1,5 +1,5 @@
-import Node from "../../src/node";
-import Edge from "../../src/edge";
+import Node from "../../src/node.js";
+import Edge from "../../src/edge.js";
 
 const node1 = () => new Node({ id: 1 });
 const node2 = () => new Node({ id: 2 });

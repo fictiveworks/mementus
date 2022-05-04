@@ -1,7 +1,7 @@
 import test from "ava";
-import Source from "../../../src/pipeline/source";
-import OutStep from "../../../src/pipeline/steps/out-step";
-import { fanOutEdges } from "../graph-sample";
+import Source from "../../../src/pipeline/source.js";
+import OutStep from "../../../src/pipeline/steps/out-step.js";
+import { fanOutEdges } from "../graph-sample.js";
 
 test("Enumerates outgoing nodes as a flat map", t => {
   const source = new Source([fanOutEdges.node(1), fanOutEdges.node(3)])

@@ -1,7 +1,7 @@
 import test from "ava";
-import Graph from "../src/graph";
-import Node from "../src/node";
-import Edge from "../src/edge";
+import Graph from "../src/graph.js";
+import Node from "../src/node.js";
+import Edge from "../src/edge.js";
 
 const node1 = () => new Node({ id: 1, label: "trunk", props: { num: "one" }});
 const node2 = () => new Node({ id: 2, label: "twig", props: { num: "two" }});

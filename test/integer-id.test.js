@@ -1,5 +1,5 @@
 import test from "ava";
-import IntegerId from "../src/integer-id";
+import IntegerId from "../src/integer-id.js";
 
 test("counts upwards from 1 by default", t => {
   const generator = new IntegerId();

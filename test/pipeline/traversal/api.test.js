@@ -1,6 +1,6 @@
 import test from "ava";
-import Traversal from "../../../src/pipeline/traversal";
-import { fanOutEdges } from "../graph-sample";
+import Traversal from "../../../src/pipeline/traversal.js";
+import { fanOutEdges } from "../graph-sample.js";
 
 test("map", t => {
   const traversal = new Traversal([1,2,3,4]);

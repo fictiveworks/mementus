@@ -1,5 +1,5 @@
 import test from "ava";
-import Traversal from "../../../src/pipeline/traversal";
+import Traversal from "../../../src/pipeline/traversal.js";
 
 test("Terminate with empty source", t => {
   const traversal = new Traversal([]);

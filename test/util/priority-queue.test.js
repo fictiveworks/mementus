@@ -1,5 +1,5 @@
 import test from "ava";
-import PriorityQueue from "../../src/util/priority-queue";
+import PriorityQueue from "../../src/util/priority-queue.js";
 
 test("priority queue starts empty", t => {
   const pqueue = new PriorityQueue();
