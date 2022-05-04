@@ -1,4 +1,4 @@
 node_modules
-/index.js
-/mementus.js
+types
+dist
 NOTES.md
