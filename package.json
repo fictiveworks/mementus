@@ -1,29 +1,43 @@
 {
   "name": "mementus",
   "version": "0.8.0",
-  "description": "Property graphs for JS applications",
+  "type": "module",
+  "description": "Graph computing for JS applications",
   "repository": "git@github.com:fictive-io/mementus",
-  "main": "index.js",
-  "module": "src/mementus.js",
-  "browser": "mementus.js",
-  "scripts": {
-    "build": "rollup -c",
-    "test": "ava --verbose"
-  },
   "author": "Mark Rickerby",
   "license": "MIT",
+  "scripts": {
+    "prepublish": "npm run build",
+    "build": "npm run build:bundle ; npm run build:compile",
+    "build:bundle": "rollup -c",
+    "build:compile": "tsc",
+    "test": "ava --verbose"
+  },
   "devDependencies": {
-    "ava": "^3.8.1",
-    "esm": "^3.0.84",
-    "rollup": "^0.66.2"
+    "@rollup/plugin-json": "^4.1.0",
+    "ava": "^4.1.0",
+    "rollup": "^2.70.1",
+    "rollup-plugin-terser": "^7.0.2",
+    "typescript": "^4.6.2"
+  },
+  "module": "src/mementus.js",
+  "main": "dist/mementus.bundle.cjs",
+  "types": "types/mementus.d.ts",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "import": "./src/mementus.js",
+      "require": "./dist/mementus.bundle.cjs"
+    },
+    "./graph": "./src/graph.js",
+    "./util/": "./src/util/",
+    "./types/": "./types/"
   },
   "files": [
-    "mementus.js",
-    "index.js",
-    "src"
-  ],
-  "ava": {
-    "files": ["test/**/*.test.js"],
-    "require": ["esm"]
-  }
+    "dist",
+    "src",
+    "types",
+    "README.md",
+    "LICENSE"
+  ]
 }
