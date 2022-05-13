@@ -1,13 +1,13 @@
 {
   "name": "mementus",
-  "version": "0.11.0",
+  "version": "0.11.1",
   "type": "module",
   "description": "Graph computing for JS applications",
   "repository": "git@github.com:fictive-io/mementus",
   "author": "Mark Rickerby",
   "license": "MIT",
   "scripts": {
-    "prepublish": "npm run build",
+    "prepublishOnly": "npm run build",
     "build": "npm run build:bundle ; npm run build:compile",
     "build:bundle": "rollup -c",
     "build:compile": "tsc",
