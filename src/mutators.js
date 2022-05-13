@@ -14,16 +14,27 @@ const Mutators = {
     if (!object.id) {
       object.id = this.nodeIds.nextId();
     }
-
-    this.structure.setNode(new Node(object));
+    const node = new Node(object);
+    this.structure.setNode(node);
+    return node;
   },
 
-  addEdge(object) {
+  addEdge(object={}) {
     if (!object.id) {
       object.id = this.edgeIds.nextId();
     }
 
-    this.structure.setEdge(new Edge(object));
+    if (!object.from) {
+      object.from = this.addNode();
+    }
+
+    if (!object.to) {
+      object.to = this.addNode();
+    }
+
+    const edge = new Edge(object);
+    this.structure.setEdge(edge);
+    return edge;
   },
 
   createNode(builder) {

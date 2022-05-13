@@ -43,6 +43,15 @@ test("#addNode with auto id", t => {
   t.is(graph.node(1).id, 1);
 });
 
+test("#addNode returns generated node", t => {
+  let node;
+  const graph = new Graph(g => {
+    node = g.addNode();
+  });
+
+  t.is(graph.node(node.id).id, node.id);
+});
+
 test("#addNode with props", t => {
   const graph = new Graph(g => {
     g.addNode({ id: 1, props: { title: "Vertex" }});
@@ -98,6 +107,15 @@ test("#addEdge with auto id", t => {
   });
 
   t.is(graph.edge(1).id, 1);
+});
+
+test("#addEdge returns generated node", t => {
+  let edge;
+  const graph = new Graph(g => {
+    edge = g.addEdge();
+  });
+
+  t.is(graph.edge(edge.id).id, edge.id);
 });
 
 test("#addEdge with props", t => {
