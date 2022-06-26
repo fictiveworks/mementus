@@ -1,34 +1,38 @@
+import test from "ava";
 import Node from "../../src/node.js";
 import Edge from "../../src/edge.js";
 
-function emptyNodeList(t, StructureImpl) {
+function macro(testTitle, exec) {
+  return test.macro({
+    exec,
+    title(providedTitle = "", impl) {
+      return testTitle;
+    }
+  });
+}
+
+const emptyNodeList = macro("starts with empty node list", (t, StructureImpl) => {
   const structure = new StructureImpl();
 
   t.is(structure.nodesCount, 0);
-}
+});
 
-emptyNodeList.title = () => "starts with empty node list";
-
-function emptyEdgeList(t, StructureImpl) {
+const emptyEdgeList = macro("starts with empty edge list", (t, StructureImpl) => {
   const structure = new StructureImpl();
 
   t.is(structure.edgesCount, 0);
-}
+});
 
-emptyEdgeList.title = () => "starts with empty edge list";
-
-function setNode(t, StructureImpl) {
+const setNode = macro("assigns a node to the graph", (t, StructureImpl) => {
   const structure = new StructureImpl();
 
   structure.setNode(new Node({ id: 1}));
 
   t.is(structure.nodesCount, 1);
   t.is(structure.edgesCount, 0);
-}
+});
 
-setNode.title = () => "assigns a node to the graph";
-
-function setEdge(t, StructureImpl) {
+const setEdge = macro("assigns an edge to the graph", (t, StructureImpl) => {
   const structure = new StructureImpl();
 
   structure.setEdge(new Edge({
@@ -39,11 +43,9 @@ function setEdge(t, StructureImpl) {
 
   t.is(structure.nodesCount, 2);
   t.is(structure.edgesCount, 1);
-}
+});
 
-setEdge.title = () => "assigns an edge to the graph";
-
-// function hasNodeIdentity(t, StructureImpl) {
+// const hasNodeIdentity = macro("tests for the presence of a given node by identity", (t, StructureImpl) => {
 //   const structure = new StructureImpl();
 //   const node = new Node({ id: 1});
 //
@@ -52,11 +54,9 @@ setEdge.title = () => "assigns an edge to the graph";
 //   structure.setNode(node);
 //
 //   t.true(structure.hasNode(node));
-// }
-//
-// hasNodeIdentity.title = () => "tests for the presence of a given node by identity";
+// });
 
-function hasNodeId(t, StructureImpl) {
+const hasNodeId = macro("tests for the presence of a given node by id", (t, StructureImpl) => {
   const structure = new StructureImpl();
 
   t.false(structure.hasNode(1));
@@ -64,12 +64,9 @@ function hasNodeId(t, StructureImpl) {
   structure.setNode(new Node({ id: 1}));
 
   t.true(structure.hasNode(1));
-}
+});
 
-hasNodeId.title = () => "tests for the presence of a given node by id";
-
-
-function hasEdgeIdentity(t, StructureImpl) {
+const hasEdgeIdentity = macro("tests for the presence of an edge by identity", (t, StructureImpl) => {
   const structure = new StructureImpl();
   const edge = new Edge({
     id: 3,
@@ -82,11 +79,9 @@ function hasEdgeIdentity(t, StructureImpl) {
   structure.setEdge(edge);
 
   t.true(structure.hasEdge(edge));
-}
+});
 
-hasEdgeIdentity.title = () => "tests for the presence of an edge by identity";
-
-function hasEdgeId(t, StructureImpl) {
+const hasEdgeId = macro("tests for the presence of an edge by id", (t, StructureImpl) => {
   const structure = new StructureImpl();
   const edge = new Edge({
     id: 123,
@@ -99,11 +94,9 @@ function hasEdgeId(t, StructureImpl) {
   structure.setEdge(edge);
 
   t.true(structure.hasEdge(123));
-}
+});
 
-hasEdgeId.title = () => "tests for the presence of an edge by id";
-
-function hasEdgeFromTo(t, StructureImpl) {
+const hasEdgeFromTo = macro("tests for the presence of an edge between nodes", (t, StructureImpl) =>{
   const structure = new StructureImpl();
   const edge = new Edge({
     id: 123,
@@ -116,11 +109,9 @@ function hasEdgeFromTo(t, StructureImpl) {
   structure.setEdge(edge);
 
   t.true(structure.hasEdge(1, 2));
-}
+});
 
-hasEdgeFromTo.title = () => "tests for the presence of an edge between nodes";
-
-function findNodeById(t, StructureImpl) {
+const findNodeById = macro("finds a node by id", (t, StructureImpl) => {
   const structure = new StructureImpl();
   const edge = new Edge({
     id: 3,
@@ -131,11 +122,23 @@ function findNodeById(t, StructureImpl) {
   structure.setEdge(edge);
 
   t.is(structure.node(1).id, edge.from.id);
-}
+});
 
-findNodeById.title = () => "finds a node by id";
+const findNodeByProp = macro("finds a node by prop value", (t, StructureImpl) => {
+  const structure = new StructureImpl();
+  const edge = new Edge({
+    id: 3,
+    from: new Node({ id: 1, props: { color: "green" }}),
+    to: new Node({ id: 2, props: { color: "yellow" }})
+  });
 
-function findEdgeById(t, StructureImpl) {
+  structure.setEdge(edge);
+
+  const [firstNode, ...rest] = structure.nodes({color: "green"});
+  t.is(firstNode.id, edge.from.id);
+})
+
+const findEdgeById = macro("finds an edge by id", (t, StructureImpl) => {
   const structure = new StructureImpl();
   const edge = new Edge({
     id: 3,
@@ -148,11 +151,9 @@ function findEdgeById(t, StructureImpl) {
   t.is(structure.edge(3).id, 3);
   t.is(structure.edge(3).from.id, 1);
   t.is(structure.edge(3).to.id, 2);
-}
+});
 
-findEdgeById.title = () => "finds an edge by id";
-
-function findAllNodes(t, StructureImpl) {
+const findAllNodes = macro("finds all nodes in the graph", (t, StructureImpl) => {
   const structure = new StructureImpl();
   const edge = new Edge({
     id: 3,
@@ -166,11 +167,9 @@ function findAllNodes(t, StructureImpl) {
 
   t.is(first.id, edge.from.id);
   t.is(last.id, edge.to.id);
-}
+});
 
-findAllNodes.title = () => "finds all nodes in the graph";
-
-function findAllEdges(t, StructureImpl) {
+const findAllEdges = macro("finds all edges in the graph", (t, StructureImpl) => {
   const structure = new StructureImpl();
   const edge1 = new Edge({
     id: 3,
@@ -190,9 +189,7 @@ function findAllEdges(t, StructureImpl) {
 
   t.is(first.id, 3);
   t.is(last.id, 4);
-}
-
-findAllEdges.title = () => "finds all edges in the graph";
+});
 
 export default [
   emptyNodeList,
@@ -205,6 +202,7 @@ export default [
   hasEdgeId,
   hasEdgeFromTo,
   findNodeById,
+  findNodeByProp,
   findEdgeById,
   findAllNodes,
   findAllEdges

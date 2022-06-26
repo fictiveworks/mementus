@@ -9,7 +9,7 @@ for (const directedGraphMacro of directedGraphMacros) {
 }
 
 for (const indexedGraphMacro of indexedGraphMacros) {
-  test(indexedGraphMacro.title(), test.macro(indexedGraphMacro), IncidenceList);
+  test(indexedGraphMacro, IncidenceList);
 }
 
 for (const mutableGraphMacro of mutableGraphMacros) {
