@@ -2,3 +2,4 @@ node_modules
 types
 dist
 NOTES.md
+.DS_Store
