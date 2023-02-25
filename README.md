@@ -5,7 +5,7 @@ Property graph data structures for JS applications.
 ## Status
 
 [![npm](https://img.shields.io/npm/v/mementus.svg)](https://npmjs.org/package/mementus)
-[![github](https://img.shields.io/github/workflow/status/fictiveworks/mementus/Node.js%20CI)](https://github.com/fictiveworks/mementus/actions)
+[![github](https://github.com/fictiveworks/mementus/actions/workflows/node.js.yml/badge.svg)](https://github.com/fictiveworks/mementus/actions)
 
 ## License
 
