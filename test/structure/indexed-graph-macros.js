@@ -136,9 +136,25 @@ const findNodeByProp = macro("finds a node by prop value", (t, StructureImpl) =>
 
   const [firstNode, ...rest] = structure.nodes({color: "green"});
   t.is(firstNode.id, edge.from.id);
-})
+});
+
+const findNodeByLabel = macro("finds a node by label", (t, StructureImpl) => {
+  const structure = new StructureImpl();
+  const edge = new Edge({
+    id: 3,
+    from: new Node({ id: 1, label: "atom" }),
+    to: new Node({ id: 2, label: "molecule" })
+  });
+
+  structure.setEdge(edge);
+
+  const [firstNode, ...rest] = structure.nodes("atom");
+  t.is(firstNode.id, edge.from.id);
+});
 
 const findEdgeById = macro("finds an edge by id", (t, StructureImpl) => {
+
+
   const structure = new StructureImpl();
   const edge = new Edge({
     id: 3,
@@ -151,6 +167,62 @@ const findEdgeById = macro("finds an edge by id", (t, StructureImpl) => {
   t.is(structure.edge(3).id, 3);
   t.is(structure.edge(3).from.id, 1);
   t.is(structure.edge(3).to.id, 2);
+});
+
+const findEdgeByProp = macro("finds an edge by prop value", (t, StructureImpl) => {
+  const structure = new StructureImpl();
+  const edge = new Edge({
+    id: 3,
+    from: new Node({ id: 1}),
+    to: new Node({ id: 2}),
+    props: {
+      bond: "covalent"
+    }
+  });
+
+  const edge2 = new Edge({
+    id: 6,
+    from: new Node({ id: 4}),
+    to: new Node({ id: 5}),
+    props: {
+      bond: "ionic"
+    }
+  });
+
+  structure.setEdge(edge);
+  structure.setEdge(edge2);
+
+  const [firstEdge, ...rest] = structure.edges({ bond: "covalent"});
+
+  t.is(firstEdge.id, 3);
+  t.is(firstEdge.from.id, 1);
+  t.is(firstEdge.to.id, 2);
+});
+
+const findEdgeByLabel = macro("finds an edge by label", (t, StructureImpl) => {
+  const structure = new StructureImpl();
+  const edge = new Edge({
+    id: 3,
+    from: new Node({ id: 1}),
+    to: new Node({ id: 2}),
+    label: "atom"
+  });
+
+  const edge2 = new Edge({
+    id: 6,
+    from: new Node({ id: 4}),
+    to: new Node({ id: 5}),
+    label: "molecule"
+  });
+
+  structure.setEdge(edge);
+  structure.setEdge(edge2);
+
+  const [firstEdge, ...rest] = structure.edges("molecule");
+
+  t.is(firstEdge.id, 6);
+  t.is(firstEdge.from.id, 4);
+  t.is(firstEdge.to.id, 5);
 });
 
 const findAllNodes = macro("finds all nodes in the graph", (t, StructureImpl) => {
@@ -203,7 +275,10 @@ export default [
   hasEdgeFromTo,
   findNodeById,
   findNodeByProp,
+  findNodeByLabel,
   findEdgeById,
+  findEdgeByProp,
+  findEdgeByLabel,
   findAllNodes,
   findAllEdges
 ];
