@@ -16,6 +16,19 @@ test("#new", t => {
   t.is(graph.edgesCount, 0);
 });
 
+test("#new with mutable API", t => {
+  const graph = new Graph(false, { isMutable: true });
+
+  graph.addEdge({ from: node1(), to: node2() });
+  graph.addEdge({ from: node2(), to: node3() });
+
+  t.is(graph.nodesCount, 3);
+  t.is(graph.edgesCount, 2);
+  t.is(graph.node(1).label, "trunk");
+  t.is(graph.node(2).label, "twig");
+  t.is(graph.node(2).label, "twig");
+});
+
 test("#setNode", t => {
   const graph = new Graph(g => {
     g.setNode(node1());

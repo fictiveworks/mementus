@@ -1,9 +1,17 @@
 import GraphBuilder from "./graph-builder.js";
 import Traversal from "./pipeline/traversal.js";
-import Source from "./pipeline/source.js";
+import Mutators from "./mutators.js";
+import IntegerId from "./integer-id.js";
+
+const defaultOptions = {
+  isMutable: false,
+  isDirected: true
+}
 
 class Graph {
-  constructor(initializer) {
+  constructor(initializer, options={}) {
+    const initialOptions = Object.assign(defaultOptions, options);
+
     const builder = new GraphBuilder();
 
     if (initializer) {
@@ -12,6 +20,12 @@ class Graph {
 
     this.structure = builder.graph();
     this.index = new Map();
+    
+    if (initialOptions.isMutable) {
+      Object.assign(Graph.prototype, Mutators);
+      this.nodeIds = new IntegerId(builder.nextNodeId());
+      this.edgeIds = new IntegerId(builder.nextEdgeId());
+    }
   }
 
   get nodesCount() {
